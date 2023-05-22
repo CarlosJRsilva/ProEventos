@@ -33,6 +33,28 @@ namespace ProEventos.Application
         }
     }
 
+    public async Task<Evento> UpdateEvento(int eventoId, Evento model)
+    {
+      try
+      {
+        var evento = await _eventoPersist.GetEventoByIdAsync(eventoId, false);
+        if (evento == null) throw new Exception("Evento para atualizar não foi encontrado.");
+
+        model.Id = evento.Id;
+
+        _geralPersist.Update(model);
+        if(await _geralPersist.SaveChangesAsync())
+        {
+            return await _eventoPersist.GetEventoByIdAsync(model.Id, false);
+        }  
+        return null;
+      }  
+      catch (Exception ex) 
+      {
+        throw new Exception(ex.Message);
+      }
+    }
+
     public async Task<bool> DeleteEvento(int eventoId)
     {
       try
@@ -40,11 +62,12 @@ namespace ProEventos.Application
         var evento = await _eventoPersist.GetEventoByIdAsync(eventoId, false);
         if (evento == null) throw new Exception("Evento para deletar não foi encontrado.");
 
-        return false;
+        _geralPersist.Delete<Evento>(evento);
+        return await _geralPersist.SaveChangesAsync();
       }  
       catch (Exception ex) 
       {
-        throw new (ex.Message);
+        throw new Exception(ex.Message);
       }
     }
 
@@ -94,9 +117,5 @@ namespace ProEventos.Application
       }    
     }
 
-    public Task<Evento> UpdateEvento(int eventoId, Evento model)
-    {
-      throw new NotImplementedException();
-    }
   }
 }
