@@ -1,0 +1,1 @@
+{"ast":null,"code":"// @Injectable({\n//   providedIn: 'root'\n// })\nexport class EventoService {\n  constructor(http) {\n    this.http = http;\n    this.baseURL = 'https://localhost:5001/api/eventos';\n  }\n  getEventos() {\n    return this.http.get(this.baseURL);\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
