@@ -16,22 +16,30 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 //componentes
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EventosComponent } from './eventos/eventos.component';
-import { PalestrantesComponent } from './palestrantes/palestrantes.component';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './shared/nav/nav.component';
 
 //Serviços
+import { EventosComponent } from './components/eventos/eventos.component';
 import { EventoService } from './services/evento.service';
+import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { ContatosComponent } from './components/contatos/contatos.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 //Pipe
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+import { TituloComponent } from './shared/titulo/titulo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventosComponent,
     PalestrantesComponent,
+    ContatosComponent,
+    DashboardComponent,
+    PerfilComponent,
     NavComponent,
+    TituloComponent,
     DateTimeFormatPipe
    ],
   imports: [
@@ -42,7 +50,7 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
     BrowserAnimationsModule,
     CollapseModule.forRoot(), //.forRoot() caso precise passar parâmetro
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 10000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       progressBar: true
